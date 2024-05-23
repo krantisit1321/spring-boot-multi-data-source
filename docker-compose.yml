@@ -1,0 +1,30 @@
+version: '3.1'
+services:
+  db1:
+    image: postgres:12
+    container_name: postgres1
+    volumes:
+      - app-db-write-data:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres_user_for_db_write
+      POSTGRES_USER: postgres
+      POSTGRES_DB: demo
+      PGDATA: /var/lib/postgresql/data/pgdata
+  db2:
+    image: postgres:12
+    container_name: postgres2
+    volumes:
+      - app-db-another-write-data:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres_user_for_db_another_write
+      POSTGRES_USER: postgres
+      POSTGRES_DB: demo
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+volumes:
+  app-db-write-data:
+  app-db-another-write-data:
